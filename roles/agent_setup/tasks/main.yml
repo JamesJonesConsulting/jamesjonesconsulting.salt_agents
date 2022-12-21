@@ -7,8 +7,6 @@
   ansible.builtin.include_tasks: "{{ salt_agent | default('minion') }}.yml"
   when:
     - "(salt_agent | default('minion')) in ['minion']"  
-# - name: Setup Salt Agent
-#   ansible.builtin.include_tasks: "{{ salt_agent | default('minion') }}.yml"
 - name: Accept salt keys of any new minions
   ansible.builtin.command: "salt-key -a -y {{ inventory_hostname }}"
   delegate_to: "{{ salt_master }}"
