@@ -5,6 +5,7 @@
     state: present
 - file:
     path: "/etc/salt/minion.d/{{ cfg }}.conf.j2"
+    state: absent
   loop:
     - master
     - ansible
