@@ -5,8 +5,8 @@
     state: present
 - name: Setup the Salt Master config 
   ansible.builtin.template:
-    src: templates/minion.d/master.conf.j2
-    dest: /etc/master.d/master.conf.j2
+    src: templates/minion/master.d/master.conf.j2
+    dest: /etc/salt/master.d/master.conf.j2
 - name: Ensure the minion is restarted
   ansible.builtin.systemd:
     name: salt-minion
