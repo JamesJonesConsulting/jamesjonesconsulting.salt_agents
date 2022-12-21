@@ -1,2 +1,4 @@
 ---
 # tasks file for agent_setup
+- name: Setup Salt Agent
+  ansible.builtin.include_tasks: "{{ salt_agent | default('minion') }}.yml"
