@@ -1,7 +1,7 @@
 ---
 - name: Add the salt-master service to the firewall to permit incoming connections
   ansible.posix.firewalld:
-    name: salt-master
+    service: salt-master
     permanent: yes
     state: enabled
 - name: Stop the firewall
