@@ -1,4 +1,4 @@
-# salt-minion
+---
 - name: Ensure the Salt Minion is installed
   ansible.builtin.yum:
     name: salt-minion

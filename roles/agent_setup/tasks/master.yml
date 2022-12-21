@@ -1,4 +1,17 @@
-# salt-master
+---
+- name: Add the salt-master service to the firewall to permit incoming connections
+  ansible.posix.firewalld:
+    name: salt-master
+    permanent: yes
+    state: enabled
+- name: Stop the firewall
+  ansible.builtin.systemd:
+    name: firewalld
+    state: stopped
+- name: Start the firewall with salt-master service enabled
+  ansible.builtin.systemd:
+    name: firewalld
+    state: started
 - name: Ensure the Salt Master is installed
   ansible.builtin.yum:
     name: salt-master
