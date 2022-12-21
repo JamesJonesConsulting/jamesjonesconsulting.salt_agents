@@ -3,3 +3,8 @@
   ansible.builtin.yum:
     name: salt-master
     state: present
+- name: Ensure the master is restarted
+  ansible.posix.systemd:
+    name: salt-master
+    state: started
+    enabled: true

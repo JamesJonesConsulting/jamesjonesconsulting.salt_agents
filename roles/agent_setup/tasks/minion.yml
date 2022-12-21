@@ -1,5 +1,14 @@
 # salt-minion
-- name: Ensure the Salt Master is installed
+- name: Ensure the Salt Minion is installed
   ansible.builtin.yum:
     name: salt-minion
     state: present
+- name: Setup the Salt Master config 
+  ansible.builtin.template:
+    src: templates/minion.d/master.conf.j2
+    dest: /etc/master.d/master.conf.j2
+- name: Ensure the minion is restarted
+  ansible.posix.systemd:
+    name: salt-minion
+    state: started
+    enabled: true
