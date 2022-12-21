@@ -13,3 +13,11 @@
   become: true
   when:
     - "(salt_agent | default('minion')) in ['minion']"
+
+- name: Run the highstate to enforce the configuration
+  ansible.builtin.command: "salt 'control01.jamesjonesconsulting.com' state.highstate"
+  delegate_to: "{{ salt_master }}"
+  become: true
+  when:
+    - "(salt_agent | default('minion')) in ['master']"
+
