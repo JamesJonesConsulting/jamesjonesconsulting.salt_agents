@@ -1,18 +1,17 @@
 ---
-# tasks file for agent_setup
-- name: Setup Salt Agent
+- name: Ensure the Salt Master is setup if in the play hosts
   ansible.builtin.include_tasks: "{{ salt_agent | default('minion') }}.yml"
+  when:
+    - "(salt_agent | default('minion')) in ['master']"
+- name: Setup Salt Minions if in the minion list
+  ansible.builtin.include_tasks: "{{ salt_agent | default('minion') }}.yml"
+  when:
+    - "(salt_agent | default('minion')) in ['minion']"  
+# - name: Setup Salt Agent
+#   ansible.builtin.include_tasks: "{{ salt_agent | default('minion') }}.yml"
 - name: Accept salt keys of any new minions
   ansible.builtin.command: "salt-key -a -y {{ inventory_hostname }}"
   delegate_to: "{{ salt_master }}"
   become: true
   when:
     - "(salt_agent | default('minion')) in ['minion']"
-# - name: Accept salt keys of any new minions
-#   ansible.builtin.command: "salt-key -a {{ inventory_hostname }}"
-#   when:
-#     - "(salt_agent | default('minion')) in ['master']"
-#     - "hostvars[host]['salt_agent'] in"
-#   loop: "{{ ansible_play_hosts }}"
-#   loop_control:
-#     loop_var: host
