@@ -4,7 +4,7 @@
     name: salt-master
     state: present
 - name: Ensure the master is restarted
-  ansible.posix.systemd:
+  ansible.builtin.systemd:
     name: salt-master
     state: started
     enabled: true

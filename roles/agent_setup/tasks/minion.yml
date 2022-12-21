@@ -8,7 +8,7 @@
     src: templates/minion.d/master.conf.j2
     dest: /etc/master.d/master.conf.j2
 - name: Ensure the minion is restarted
-  ansible.posix.systemd:
+  ansible.builtin.systemd:
     name: salt-minion
     state: started
     enabled: true
