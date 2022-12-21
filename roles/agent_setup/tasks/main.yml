@@ -8,7 +8,7 @@
   when:
     - "(salt_agent | default('minion')) in ['minion']"  
 - name: Accept salt keys of any new minions
-  ansible.builtin.command: "salt-key -a -y {{ inventory_hostname }}"
+  ansible.builtin.command: "salt-key -a {{ inventory_hostname }} -y"
   delegate_to: "{{ salt_master }}"
   become: true
   when:
