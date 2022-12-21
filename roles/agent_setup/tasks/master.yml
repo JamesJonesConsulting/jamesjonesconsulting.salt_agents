@@ -16,6 +16,53 @@
   ansible.builtin.yum:
     name: salt-master
     state: present
+- name: Ensure data folders exists
+  ansible.builtin.file:
+    path: "/opt/{{ fld }}"
+    state: directory
+  loop:
+    - salt
+    - pillar
+  loop_control:
+    loop_var: fld
+- name: Create the top.sls file
+  ansible.builtin.copy:
+    content: |
+      base:
+        'control01.jamesjonesconsulting.com':
+          - cockpit
+    dest: /opt/salt/top.sls
+- name: Create the cockpit directory
+  ansible.builtin.file:
+    path: /opt/salt/cockpit
+    state: directory
+- name: Create cockpit init.sls file 
+  ansible.builtin.copy:
+    content: |
+      cockpit:
+        pkg:
+          - installed
+        service:
+          - name: cockpit.socket
+          - running
+          - enable: true
+        firewalld:
+          - add_service cockpit permanent=True
+          - reload_rules
+    dest: /opt/salt/cockpit/init.sls
+# - name: Ensure the pilar base exists
+#   ansible.builtin.file:
+#     path: /etc/salt/pillar.d
+#     state: directory
+- name: Setup the Salt Master configs
+  ansible.builtin.template:
+    src: "templates/master.d/{{ cfg }}.conf.j2"
+    dest: "/etc/salt/master.d/{{ cfg }}.conf"
+  loop:
+    - pillar
+    - file
+  loop_control:
+    loop_var: cfg
 - name: Ensure the master is restarted
   ansible.builtin.systemd:
     name: salt-master
