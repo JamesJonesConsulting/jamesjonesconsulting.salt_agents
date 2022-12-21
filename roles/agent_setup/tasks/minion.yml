@@ -3,13 +3,21 @@
   ansible.builtin.yum:
     name: salt-minion
     state: present
-- name: Setup the Salt Minion configs
-  ansible.builtin.template:
-    src: "templates/minion.d/{{ cfg }}.conf.j2"
-    dest: "/etc/salt/minion.d/{{ cfg }}.conf.j2"
+- file:
+    path: "/etc/salt/minion.d/{{ cfg }}.conf.j2"
   loop:
     - master
     - ansible
+  loop_control:
+    loop_var: cfg
+- name: Setup the Salt Minion configs
+  ansible.builtin.template:
+    src: "templates/minion.d/{{ cfg }}.conf.j2"
+    dest: "/etc/salt/minion.d/{{ cfg }}.conf"
+  loop:
+    - master
+    - ansible
+    - id
   loop_control:
     loop_var: cfg
 - name: Ensure the minion is restarted
