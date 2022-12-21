@@ -2,3 +2,7 @@
 # tasks file for agent_setup
 - name: Setup Salt Agent
   ansible.builtin.include_tasks: "{{ salt_agent | default('minion') }}.yml"
+- name: Accept salt keys of any new minions
+  command: "salt-key -a {{ inventory_hostname }}"
+  when:
+    - "(salt_agent | default('minion')) in ['minion']"
