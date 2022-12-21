@@ -1,0 +1,5 @@
+# salt-minion
+- name: Ensure the Salt Master is installed
+  ansible.builtin.yum:
+    name: salt-minion
+    state: present

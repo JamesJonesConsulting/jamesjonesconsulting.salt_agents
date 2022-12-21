@@ -1,0 +1,5 @@
+# salt-master
+- name: Ensure the Salt Master is installed
+  ansible.builtin.yum:
+    name: salt-master
+    state: present
