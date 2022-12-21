@@ -15,5 +15,5 @@
 - name: Ensure the minion is restarted
   ansible.builtin.systemd:
     name: salt-minion
-    state: started
+    state: restarted
     enabled: true

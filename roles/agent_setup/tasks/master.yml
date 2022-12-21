@@ -19,5 +19,5 @@
 - name: Ensure the master is restarted
   ansible.builtin.systemd:
     name: salt-master
-    state: started
+    state: restarted
     enabled: true
