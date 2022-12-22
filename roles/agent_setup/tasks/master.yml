@@ -48,7 +48,7 @@
           - enable: true
         firewalld.present:
           - name: public
-          - services
+          - services:
             - cockpit 
     dest: /opt/salt/cockpit/init.sls
 # - name: Ensure the pilar base exists
