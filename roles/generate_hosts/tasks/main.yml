@@ -1,2 +1,8 @@
 ---
-# tasks file for generate_hosts
+- name: Gather facts from all servers
+  ansible.builtin.setup:
+  delegate_to: "{{ host }}"
+  delegate_facts: true
+  loop: "{{ groups['all'] }}"
+  loop_control:
+    loop_var: host
