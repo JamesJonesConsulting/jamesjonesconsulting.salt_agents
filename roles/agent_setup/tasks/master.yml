@@ -47,6 +47,7 @@
           - running
           - enable: true
         firewalld.present:
+          - name: public
           - services
             - cockpit 
     dest: /opt/salt/cockpit/init.sls
