@@ -1,2 +1,2 @@
 ---
-# defaults file for generate_hosts
+generate_hosts_group: all
