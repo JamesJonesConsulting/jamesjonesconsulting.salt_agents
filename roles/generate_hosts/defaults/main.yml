@@ -1,2 +1,2 @@
 ---
-generate_hosts_group: all
+generate_hosts_group: salt_minion
