@@ -14,7 +14,11 @@
     loop_var: host
 - debug:
     msg: "{{ top_base }}"  
-
+- debug:
+    msg: "{{ hostvars[host] }}"
+  loop: "{{ groups[generate_hosts_group] }}"
+  loop_control:
+    loop_var: host
     #   base:
     #     'control01.jamesjonesconsulting.com':
     #       - cockpit
