@@ -27,7 +27,7 @@
   ansible.builtin.include_tasks: state.yml
   vars:
     state:
-      name: st.key
+      name: "{{ st.key }}"
       definition: "{{ { st.key: st.value } }}"
   loop: "{{ (states_init | default({})) | dict2items }}"
   loop_control:
