@@ -1,2 +1,14 @@
 ---
 generate_hosts_group: salt_minion
+states_init:
+  cockpit:
+    pkg:
+      - installed
+    service:
+      - name: cockpit.socket
+      - running
+      - enable: true
+    firewalld.present:
+      - name: public
+      - services:
+        - cockpit 

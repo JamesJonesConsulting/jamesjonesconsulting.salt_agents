@@ -25,13 +25,13 @@
     - pillar
   loop_control:
     loop_var: fld
-- name: Create the top.sls file
-  ansible.builtin.copy:
-    content: |
-      base:
-        'control01.jamesjonesconsulting.com':
-          - cockpit
-    dest: /opt/salt/top.sls
+# - name: Create the top.sls file
+#   ansible.builtin.copy:
+#     content: |
+#       base:
+#         'control01.jamesjonesconsulting.com':
+#           - cockpit
+#     dest: /opt/salt/top.sls
 - name: Create the cockpit directory
   ansible.builtin.file:
     path: /opt/salt/cockpit

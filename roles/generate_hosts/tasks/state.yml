@@ -1,0 +1,9 @@
+---
+- name: Create the state directory
+  ansible.builtin.file:
+    path: "/opt/salt/{{ state.name }}"
+    state: directory
+- name: Create state init.sls file 
+  ansible.builtin.copy:
+    content: "{{ state.definition | to_nice_yaml }}"
+    dest: "/opt/salt/{{ state.name }}/init.sls"
