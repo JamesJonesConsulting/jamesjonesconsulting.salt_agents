@@ -19,7 +19,10 @@
   loop: "{{ groups[generate_hosts_group] }}"
   loop_control:
     loop_var: host
+- name: Write out the top.sls
+  ansible.builtin.copy:
+    content: "{{ { 'base': top_base } | to_nice_yaml }}"
     #   base:
     #     'control01.jamesjonesconsulting.com':
     #       - cockpit
-    # dest: /opt/salt/top.sls
+    dest: /opt/salt/top.sls
