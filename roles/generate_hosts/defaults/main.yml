@@ -8,6 +8,7 @@ states_init:
       - name: cockpit.socket
       - running
       - enable: true
+  cockpit.firewall:
     firewalld.present:
       - name: public
       - services:

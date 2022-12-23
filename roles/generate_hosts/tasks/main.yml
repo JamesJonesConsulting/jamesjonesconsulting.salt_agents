@@ -32,23 +32,3 @@
   loop: "{{ (states_init | default({})) | dict2items }}"
   loop_control:
     loop_var: st
-
-# - name: Create the cockpit directory
-#   ansible.builtin.file:
-#     path: /opt/salt/cockpit
-#     state: directory
-# - name: Create cockpit init.sls file 
-#   ansible.builtin.copy:
-#     content: |
-#       cockpit:
-#         pkg:
-#           - installed
-#         service:
-#           - name: cockpit.socket
-#           - running
-#           - enable: true
-#         firewalld.present:
-#           - name: public
-#           - services:
-#             - cockpit 
-#     dest: /opt/salt/cockpit/init.sls
