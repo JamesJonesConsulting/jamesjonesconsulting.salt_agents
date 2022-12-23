@@ -8,7 +8,7 @@
     loop_var: host
 - name: Construct the state base list
   ansible.builtin.set_fact:
-    top_base: "{{ (top_base | default({})) | ansible.builtin.combine({ host: (salt_states | default({})) }}"
+    top_base: "{{ (top_base | default({})) | ansible.builtin.combine({ host: (hostvars[host]['salt_states'] | default([])) }) }}"
   loop: "{{ groups[generate_hosts_group] }}"
   loop_control:
     loop_var: host
